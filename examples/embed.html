@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Monica CV Maker embed example</title>
+    <style>
+      body { font-family: system-ui, sans-serif; max-width: 1200px; margin: 24px auto; padding: 0 16px; }
+    </style>
+  </head>
+  <body>
+    <h1>Make your CV</h1>
+    <div id="cv" data-monica-cv data-accent="#ff6600"></div>
+    <script src="http://localhost:8080/embed.js" async></script>
+    <script>
+      document.getElementById("cv").addEventListener("monica-cv:download", (event) => {
+        console.log("CV downloaded by", event.detail.name);
+      });
+    </script>
+  </body>
+</html>
