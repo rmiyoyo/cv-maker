@@ -79,9 +79,15 @@ Embedding is limited by `FRAME_ANCESTORS`. Add a site there before embedding on 
 | `STATIC_DIR` | `../web/dist` |
 | `FRAME_ANCESTORS` | `'self' https://monicahr.com https://*.monicahr.com` |
 
-## Docker
+## Deploy
+
+Build the static files and the server binary, copy both to the host, and run the binary under systemd behind nginx:
 
 ```sh
-docker build -t cv-maker .
-docker run -p 8080:8080 cv-maker
+cd web && npm ci && npm run build
+cd ../server && GOOS=linux GOARCH=amd64 go build -o cv-maker .
+```
+
+```sh
+STATIC_DIR=/srv/cv-maker/dist PORT=8080 /srv/cv-maker/cv-maker
 ```
